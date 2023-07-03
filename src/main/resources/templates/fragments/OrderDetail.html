@@ -1,0 +1,79 @@
+<ul class="M-orderInfo" id="orderInfomation" th:fragment="orderDetail_of_table">
+    <div th:if="${NoData}" class="no-orderInfo-data">
+        <strong>No order</strong>
+    </div>
+    <li th:each="order,index : ${orderDetails}" class="hv-ap-btn">
+        <div>
+
+            <div th:if="${order.getDrink()} == null">
+                <svg style="width: fit-content; rotate: 360deg; height: 2rem; margin-left: 5px;;margin-right: -2px;"
+                    version="1.0" xmlns="http://www.w3.org/2000/svg" width="128.000000pt" height="128.000000pt"
+                    viewBox="0 0 128.000000 128.000000" preserveAspectRatio="xMidYMid meet">
+
+                    <g transform="translate(0.000000,128.000000) scale(0.100000,-0.100000)" fill="#000000"
+                        stroke="none">
+                        <path
+                            d="M7 1084 c-4 -4 -7 -70 -7 -147 l0 -139 30 -28 30 -28 0 -260 c0 -224 2 -263 16 -276 20 -20 48 -20 68 0 14 13 16 52 16 276 l0 260 30 28 31 29 -3 143 c-3 119 -5 143 -18 143 -12 0 -16 -18 -18 -87 -1 -49 -7 -88 -12 -88 -5 0 -11 39 -12 88 -2 69 -6 87 -18 87 -12 0 -16 -18 -18 -87 -1 -49 -7 -88 -12 -88 -5 0 -11 39 -12 88 -2 69 -6 87 -18 87 -12 0 -16 -18 -18 -87 -1 -49 -7 -88 -12 -88 -5 0 -11 39 -12 87 -3 79 -12 106 -31 87z m173 -242 c0 -39 -17 -52 -70 -52 -53 0 -70 13 -70 52 0 28 0 28 70 28 70 0 70 0 70 -28z m-60 -352 c0 -167 -4 -260 -10 -260 -6 0 -10 93 -10 260 0 167 4 260 10 260 6 0 10 -93 10 -260z" />
+                        <path
+                            d="M538 1075 c-82 -22 -141 -57 -204 -119 -258 -258 -117 -696 245 -758 189 -32 383 67 470 240 88 175 56 379 -83 518 -116 115 -278 161 -428 119z m216 -40 c77 -20 133 -54 193 -118 152 -162 149 -403 -9 -563 -232 -237 -635 -107 -691 222 -21 124 17 246 106 341 108 115 251 157 401 118z" />
+                        <path
+                            d="M570 941 c-86 -28 -160 -91 -201 -171 -33 -64 -33 -184 -1 -256 29 -64 92 -126 157 -156 70 -32 180 -32 250 0 114 52 179 154 179 282 1 124 -59 221 -169 277 -53 28 -166 40 -215 24z m212 -68 c154 -86 182 -297 57 -422 -126 -126 -334 -97 -423 59 -27 48 -31 65 -31 130 0 65 4 82 31 130 32 57 97 111 158 130 57 17 150 5 208 -27z" />
+                        <path
+                            d="M1127 1083 c-4 -3 -7 -199 -7 -434 0 -375 2 -429 16 -443 20 -20 48 -20 68 0 13 13 16 45 16 199 l0 184 28 3 27 3 3 195 c2 180 1 198 -18 228 -31 51 -109 89 -133 65z m99 -84 c10 -21 14 -70 14 -199 l0 -170 -40 0 -40 0 0 210 0 210 26 -12 c14 -7 32 -24 40 -39z m-46 -589 c0 -113 -4 -180 -10 -180 -6 0 -10 67 -10 180 0 113 4 180 10 180 6 0 10 -67 10 -180z" />
+                    </g>
+                </svg>
+            </div>
+
+            <div th:if="${order.getDrink()} != null">
+                <svg style="rotate: 360deg;width: fit-content;height: 1.7rem;margin-left: 7px;" version="1.0"
+                    xmlns="http://www.w3.org/2000/svg" width="128.000000pt" height="128.000000pt"
+                    viewBox="0 0 128.000000 128.000000" preserveAspectRatio="xMidYMid meet">
+                    <g transform="translate(0.000000,128.000000) scale(0.100000,-0.100000)" fill="#000000"
+                        stroke="none">
+                        <path
+                            d="M828 1263 c-9 -10 -22 -37 -29 -60 -7 -24 -15 -43 -18 -43 -3 1 -31   9 -61 20 -101 36 -213 19 -307 -46 -63 -44 -126 -132 -143 -203 -7 -30 -18   -51 -25 -51 -8 0 -27 -11 -42 -24 -26 -22 -28 -30 -28 -96 0 -66 2 -74 28 -96   15 -13 35 -24 43 -24 8 0 14 -1 14 -2 0 -2 18 -142 39 -312 27 -213 43 -311   53 -317 17 -11 509 -11 526 0 10 6 26 104 53 317 21 170 39 310 39 312 0 1 6   2 14 2 8 0 28 11 43 24 26 22 28 30 28 96 0 66 -2 74 -28 96 -15 13 -34 24   -41 24 -7 0 -20 26 -29 58 -9 34 -33 82 -57 113 -45 60 -44 57 -28 110 l11 39   93 0 c112 0 124 4 124 40 0 16 -7 30 -16 34 -9 3 -66 6 -128 6 -95 0 -115 -3   -128 -17z m-123 -162 c32 -12 49 -23 46 -32 -2 -8 -6 -33 -8 -55 -5 -37 -3   -43 17 -49 24 -7 60 18 60 42 0 8 5 11 11 7 13 -7 59 -103 59 -121 0 -10 -62   -13 -275 -13 l-275 0 6 28 c28 116 147 211 264 211 25 0 68 -8 95 -18z m265   -341 l0 -40 -355 0 -355 0 0 40 0 40 355 0 355 0 0 -40z m-84 -157 c-3 -21   -17 -130 -31 -243 -14 -113 -28 -222 -31 -242 l-6 -38 -203 0 -203 0 -6 38   c-3 20 -17 129 -31 242 -14 113 -28 222 -31 243 l-6 37 277 0 277 0 -6 -37z" />
+                    </g>
+                </svg>
+            </div>
+
+        </div>
+
+        <div th:text="${index.index+1}"> index of order details lsit +1</div>
+        <!-- <div th:text="${order.id}">1</div> -->
+        <div th:text="${order.getDrink()} == null ? ${order.getFood().getName()} : ${order.getDrink().getName()}">
+        </div>
+        <div>
+            <div th:if="${order.getDrink()} != null">
+                <div th:text="${order.getSize()}"></div>
+            </div>
+        </div>
+        <div>
+            <!-- <di th:text="${order.getQuantity()}"></di> -->
+            <div style="height: 100%; display: flex; align-items: center;">
+                <input type="number" min="1" th:value="${order.getQuantity()}" onblur="editQuantity(this)" th:data-drinkfood_id="${order.id}" class="edit-quantity-food-drink">
+            </div>
+        </div>
+        <div th:text="${order.getSubtotal()}">price</div>
+        <div>
+            <div class="btn-ap">
+                <button onclick="editOrder(this)" th:value="${order.id}" th:if="${order.getDrink() != null}">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" style="height: 1.23rem;">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+                    </svg>
+                </button>
+
+            </div>
+            <div class="btn-ap">
+                <button onclick="deleteOrder(this)" th:value="${order.id}">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" style="height: 1.23rem;">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </li>
+</ul>

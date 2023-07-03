@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: sans-serif;
+        padding: 0;
+        margin: 0;
+    }
+
+    ::-webkit-scrollbar {
+        width: .42rem;
+        height: .42rem;
+    }
+
+    ::-webkit-scrollbar-track {
+        border: 0.01vh solid rgb(114, 114, 114);
+        border-radius: 1rem;
+        margin-block: 1rem;
+        margin-inline: 3rem;
+
+    }
+
+    ::-webkit-scrollbar-thumb {
+        border: 0.01vh solid rgb(114, 114, 114);
+        border-radius: 1rem;
+
+        background-image: linear-gradient(120deg, #ffb75e 10%, hsl(36, 98%, 48%) 100%);
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background-image: linear-gradient(120deg, #eda143 10%, hsl(36, 98%, 41%) 100%);
+    }
+
+    ::-webkit-scrollbar-thumb:active {
+        background-image: linear-gradient(120deg, #eda143 10%, hsl(36, 95%, 30%) 100%);
+    }
+
+    button {
+        background: transparent;
+        border: none;
+    }
+
+    button:hover {
+        cursor: pointer;
+    }
+
+    hr {
+        padding: 0;
+        margin: 0;
+    }
+
+
+
+    .M-drink-selection {
+        height: 100vh;
+        width: 100%;
+        display: flex;
+        overflow: hidden;
+
+        position: relative;
+    }
+
+    /*######################################  section left   ############################################# */
+    /*######################################  section left   ############################################# */
+    /*######################################  section left   ############################################# */
+    /*######################################  section left   ############################################# */
+    .M-sec-left {
+        width: 50%;
+        height: 100%;
+        border: none;
+        border-right: 1px solid #6FC3DF;
+
+        position: relative;
+    }
+
+    .M-sec-left button:hover {
+        cursor: pointer;
+    }
+
+
+
+    #category {
+        width: 49vw;
+        display: flex;
+        padding-top: .24rem;
+        height: 3.7rem;
+    }
+
+
+    .M-category-button {
+        min-width: 6.85rem;
+        height: 2.6rem;
+        margin-left: .4rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-weight: 600;
+        border: 2px solid hsl(273, 80%, 60%);
+        border-radius: 4px;
+        overflow: hidden;
+        /* overflow: hidden; */
+
+        z-index: 11;
+        background-color: rgb(255, 255, 255);
+        position: relative;
+        top: 1px;
+        transition: .2s;
+    }
+
+    .M-category-button:hover {
+        height: 7.83rem;
+    }
+
+
+    .M-category-button #allDrinks {
+        width: fit-content;
+        height: calc(2.6rem - 2px);
+        border-radius: 2px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+
+
+    }
+
+
+    .M-food-drink-ctg-wrapper {
+        position: absolute;
+        top: 2.6rem;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        row-gap: .1rem;
+        z-index: 11;
+    }
+
+    .M-food-drink-ctg-wrapper>* {
+        z-index: 11;
+        min-width: 100%;
+        width: fit-content;
+        height: calc(2.6rem - 2px);
+        border-radius: 2px;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        border-radius: 2px;
+        /* border: 1px solidorange; */
+        /* background-color: hsl(42, 100%, 45%); */
+    }
+
+    /* .M-drinks-category{
+    width: fit-content;
+    height: calc(2.6rem - 2px);
+    border-radius: 2px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #1bcf3f;
+
+} */
+
+
+
+    .M-category-button button svg {
+        height: 1.5rem;
+        rotate: -90deg;
+    }
+
+    .M-category-button button:hover {
+        color: blue;
+    }
+
+    .M-categoryList-wrapper {
+        padding-left: .3rem;
+        height: 3.5rem;
+        overflow-x: auto;
+        overflow-y: hidden;
+        margin-bottom: 3px;
+
+    }
+
+    #categoryList {
+        width: fit-content;
+
+        display: flex;
+        gap: .5rem;
+        box-sizing: border-box;
+        z-index: 10;
+        font-weight: 600;
+
+        border: 1px solid hsl(240, 100%, 80%);
+        border-radius: 4px;
+
+
+    }
+
+    .M-classList-toggle {
+        flex-wrap: wrap;
+        position: absolute;
+        background-color: white;
+    }
+
+
+
+
+    .M-category-name {
+        height: 2.6rem;
+        min-width: 5rem;
+        max-width: 7rem;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 2px solid black;
+        border-radius: 4px;
+
+    }
+
+    .M-category-name:hover {
+        /* color: #E73D85; */
+        border-color: #E73D85;
+        color: white;
+        background-color: rgb(0, 0, 0);
+    }
+
+
+    #category-data {
+        height: 90vh;
+        overflow: auto;
+
+    }
+
+    #category-data> :first-child {
+        margin: .3rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: .75rem;
+        justify-content: center;
+    }
+
+
+    .M-drink-data {
+        height: 10.5rem;
+        width: 10.5rem;
+
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .M-drink-data>:first-child {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid #c2c2c2;
+        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        border-radius: 4px;
+        overflow: hidden;
+    }
+
+    .M-drink-data>:first-child:hover {
+        position: absolute;
+        animation: resize-animated .15s forwards ease-in-out;
+    }
+
+    .M-drink-data>:first-child:active {
+        background-color: #e3e3e3;
+
+    }
+
+    @keyframes resize-animated {
+        0% {
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        100% {
+            left: -1%;
+            width: 102%;
+            height: 102%;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 1.5), 0 2px 4px -2px rgba(0, 0, 0, 0.5);
+        }
+    }
+
+    .M-drink-data strong {
+        min-height: 27%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+    }
+
+
+    .M-drink-data-img-wrapper {
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .M-drink-data-img-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+    }
+
+
+    /*######################################  section right   ############################################# */
+    /*######################################  section right   ############################################# */
+    /*######################################  section right   ############################################# */
+    /*######################################  section right   ############################################# */
+    .M-sec-right {
+        width: 50%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border: none;
+        border-left: 1px solid #6FC3DF;
+
+        overflow: auto;
+
+        /* background-color: var(); */
+    }
+
+    .M-sec-right>strong {
+        margin-top: .5rem;
+        font-size: 1.2rem;
+        padding: 0 1rem 0 1rem;
+
+        border-bottom: 2px solid black;
+    }
+
+
+    .M-orderInfo {
+        padding-left: 0;
+        margin-top: 1rem;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        row-gap: .3rem;
+        align-items: center;
+
+    }
+
+    .M-orderInfo>* {
+        height: 2.2rem;
+        width: 97%;
+        border: 2px solid transparent;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        border: .5px solid hsl(0, 0%, 75%);
+        box-shadow: 0 3px 4px hsl(0, 0%, 70%);
+        /* box-shadow: 0 2px 4px hsl(0, 0%, 44%); */
+        font-weight: 500;
+    }
+
+    .M-orderInfo>*:hover {
+        border-color: hsl(270, 93%, 54%) !important;
+        box-shadow: 0 3px 4px hsl(0, 0%, 55%) !important;
+        /* border-color: #7a7a7a; */
+
+    }
+
+
+    .M-orderInfo>*>:nth-child(2) {
+        width: 11%;
+        padding-left: 1rem;
+    }
+
+    .M-orderInfo>*>:nth-child(3) {
+        width: 30%;
+        padding-left: .5rem;
+
+    }
+
+    .M-orderInfo>*>:nth-child(4) {
+        width: 12%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .M-orderInfo>*>:nth-child(5) {
+        width: 20%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .M-orderInfo>*>:nth-child(6) {
+        width: 7%;
+        margin-left: 4%;
+    }
+
+    .M-orderInfo>*>:last-child {
+        display: flex;
+        margin-right: .5rem;
+        margin-left: auto;
+
+    }
+
+    .M-orderInfo>*>:last-child>* {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /* background-color: red; */
+
+    }
+
+    .edit-quantity-food-drink {
+        font-size: 1rem;
+        width: 3.2rem;
+        padding: .2rem .4rem .2rem 0;
+        padding-left: .4rem !important;
+        border-radius: 4px;
+        border: 1px solid transparent;
+    }
+
+    .M-orderInfo>*:hover .edit-quantity-food-drink {
+        border-color: hsl(240, 100%, 55%);
+    }
+
+
+    .M-orderInfo>*>:last-child :hover {
+        color: blue;
+    }
+
+    .M-rotate-ctg-up {
+        animation: toggle-ctg-up forwards 200ms;
+    }
+
+    @keyframes toggle-ctg-up {
+        0% {
+            rotate: 0deg;
+        }
+
+        100% {
+            rotate: 180deg;
+        }
+    }
+
+    .M-rotate-ctg-down {
+        animation: toggle-ctg-down forwards 200ms;
+    }
+
+    @keyframes toggle-ctg-down {
+        0% {
+            rotate: 180deg;
+        }
+
+        100% {
+            rotate: 360deg;
+        }
+    }
+
+
+    /* ------- !necessary but.... -------- */
+    .ctg-text-see-all-button {
+        position: relative;
+    }
+
+    .ctg-text-see-all-button div {
+        width: 6.5rem;
+        font-size: .6rem;
+        font-weight: normal;
+        position: absolute;
+        border: 0.001px solid rgb(198, 198, 198);
+        background-color: #f2f2f2;
+        border-radius: 2px;
+        top: -1rem;
+        left: -5px;
+        z-index: 20;
+        display: none;
+    }
+
+
+    .ctg-text-see-all-button:hover div {
+        display: block;
+    }
+
+    /* ----------------------- */
+
+
+    .hv-ap-btn:hover .btn-ap {
+        display: block !important;
+    }
+
+    .btn-ap {
+        display: none !important;
+    }
+
+    /* -----border when click for category---- */
+    .CTG-on-hover {
+        border-color: #E73D85;
+        color: white;
+        background-color: rgb(0, 0, 0);
+
+    }
+
+    .CTG-on-hover svg {
+        filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(212deg) brightness(105%) contrast(103%);
+    }
+
+
+    /* -=-=-=-----=-=-= if no order ---- */
+    .no-orderInfo-data {
+        all: unset;
+        position: relative;
+        width: 100%;
+    }
+
+    .no-orderInfo-data strong {
+        width: fit-content !important;
+        position: absolute;
+        left: 50%;
+        top: 10rem;
+        transform: translate(-50%, -50%);
+        border-radius: 4px;
+    }
+
+    #checkout-screen {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        background-color: rgb(128, 128, 128, 0.6);
+        z-index: 12;
+        font-weight: 600;
+        font-size: larger;
+        display: none;
+
+    }
+
+    #checkout-screen form {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 20;
+
+        height: 20rem;
+        width: 50rem;
+        background-color: #fff;
+        border-radius: 4px;
+        border: 2px solid black;
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        justify-content: center;
+    }
+
+    .c12 {
+        height: 3rem;
+        width: 100%;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        column-gap: 7rem;
+    }
+
+    .submit-checkout {
+        height: 4rem;
+        width: 100%;
+        display: flex;
+        column-gap: 8rem;
+        align-items: center;
+
+        justify-content: center;
+
+    }
+
+    .submit-checkout button {
+        margin-top: 2rem;
+        padding: .3rem 0 .3rem 0;
+        width: 10%;
+        background-color: black;
+        color: #e3e3e3;
+        border-radius: 4px;
+
+        border: 1px solid black;
+        font-weight: inherit;
+        font-size: inherit;
+    }
+
+    .submit-checkout button:hover {
+        background-color: rgb(255, 255, 255);
+        color: black;
+    }
+
+    .submit-checkout button:active {
+        background-color: rgb(0, 0, 0);
+        color: rgb(255, 255, 255);
+    }
+
+    /* add order -screen */
+    /* add order -screen */
+    /* add order -screen */
+    /* add order -screen */
+    /* add order -screen */
+    /* add order -screen */
+    .add-drink-order {
+        position: absolute;
+        width: 100%;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.7);
+        z-index: 15;
+
+        display: none;
+    }
+
+    #drink-edit-screen {
+        position: absolute;
+        width: 100%;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.7);
+        z-index: 15;
+
+        display: none;
+    }
+
+    .add-drink-order * {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        box-sizing: border-box;
+    }
+
+
+    .add-drink-order input[type="checkbox"] {
+        width: 25px;
+        height: 25px;
+        margin: 5px;
+    }
+
+    .add-drink-order label {
+        font-size: 20px;
+        margin: 5px;
+    }
+
+    .add-drink-order .checkbox,
+    .add-drink-order .cream {
+        width: 50%;
+        margin-left: 20px;
+        display: flex;
+        font-size: 22px;
+        align-items: center;
+        justify-content: start;
+    }
+
+    .add-drink-order #open-modal,
+    .add-drink-order #modal-overlay button {
+        padding: 10px;
+        font-size: 1.1em;
+        background: #32bacf;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+    }
+
+    .add-drink-order #modal-overlay button:hover {
+        background: rgba(0, 0, 0, 0.7);
+    }
+
+    .add-drink-order #modal-overlay {
+        width: 100%;
+        height: 100vh;
+        position: absolute;
+        /* background: rgba(0, 0, 0, 0.7); */
+        /* display: none; */
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .add-drink-order #modal-overlay #modal {
+        max-width: 500px;
+        width: 100%;
+        background: #9DB2BF;
+        height: 400px;
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        border-radius: 10px;
+        row-gap: 10px;
+    }
+
+    .add-drink-order #modal-overlay #modal .modal-header {
+        width: 100%;
+        height: 25%;
+        font-size: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        justify-content: start;
+        row-gap: 15px;
+    }
+
+    .add-drink-order #modal-overlay #modal .modal-content {
+        width: 100%;
+        height: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        justify-content: start;
+        row-gap: 15px;
+    }
+
+    .add-drink-order #modal-overlay #modal .modal-footer {
+        width: 100%;
+        height: 25%;
+        display: flex;
+        align-items: center;
+        justify-content: end;
+        column-gap: 5px;
+    }
+
+    .add-drink-order .box {
+        width: 50%;
+        margin-left: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: start;
+    }
+
+    .add-drink-order .box #sugar-select {
+        /* background-color: #27374D; */
+        /* color: white; */
+        padding: 10px;
+        margin-left: 10px;
+        width: 100px;
+        border: none;
+        border-radius: 3px;
+        font-size: 16px;
+        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+        /* -webkit-appearance: button; */
+        /* appearance: button; */
+        outline: none;
+    }
+</style>
+
+<body>
+    <div class="M-drink-selection">
+        <section class="M-sec-left">
+            <div id="category">
+                <div class="M-category-button">
+                    <div style="display: flex;">
+                        <button id="allDrinks" onclick="fetchFoods_DrinkByCategory(this)" th:value="0">
+                            <Strong class="ctg-text-see-all-button">Category
+                                <div>click to see all drinks</div>
+                            </Strong>
+                        </button>
+
+                        <button onclick="viewAllCategory(this)">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M18.75 19.5l-7.5-7.5 7.5-7.5m-6 15L5.25 12l7.5-7.5" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="M-food-drink-ctg-wrapper">
+
+                        <button onclick="fetchCategoryData(this)" th:value="drink" id="drink-category-button">
+                            <strong>Drinks</strong>
+                            <svg style="rotate: 360deg;width: fit-content;height: 1.7rem;" version="1.0"
+                                xmlns="http://www.w3.org/2000/svg" width="128.000000pt" height="128.000000pt"
+                                viewBox="0 0 128.000000 128.000000" preserveAspectRatio="xMidYMid meet">
+                                <g transform="translate(0.000000,128.000000) scale(0.100000,-0.100000)" fill="#000000"
+                                    stroke="none">
+                                    <path
+                                        d="M828 1263 c-9 -10 -22 -37 -29 -60 -7 -24 -15 -43 -18 -43 -3 1 -31   9 -61 20 -101 36 -213 19 -307 -46 -63 -44 -126 -132 -143 -203 -7 -30 -18   -51 -25 -51 -8 0 -27 -11 -42 -24 -26 -22 -28 -30 -28 -96 0 -66 2 -74 28 -96   15 -13 35 -24 43 -24 8 0 14 -1 14 -2 0 -2 18 -142 39 -312 27 -213 43 -311   53 -317 17 -11 509 -11 526 0 10 6 26 104 53 317 21 170 39 310 39 312 0 1 6   2 14 2 8 0 28 11 43 24 26 22 28 30 28 96 0 66 -2 74 -28 96 -15 13 -34 24   -41 24 -7 0 -20 26 -29 58 -9 34 -33 82 -57 113 -45 60 -44 57 -28 110 l11 39   93 0 c112 0 124 4 124 40 0 16 -7 30 -16 34 -9 3 -66 6 -128 6 -95 0 -115 -3   -128 -17z m-123 -162 c32 -12 49 -23 46 -32 -2 -8 -6 -33 -8 -55 -5 -37 -3   -43 17 -49 24 -7 60 18 60 42 0 8 5 11 11 7 13 -7 59 -103 59 -121 0 -10 -62   -13 -275 -13 l-275 0 6 28 c28 116 147 211 264 211 25 0 68 -8 95 -18z m265   -341 l0 -40 -355 0 -355 0 0 40 0 40 355 0 355 0 0 -40z m-84 -157 c-3 -21   -17 -130 -31 -243 -14 -113 -28 -222 -31 -242 l-6 -38 -203 0 -203 0 -6 38   c-3 20 -17 129 -31 242 -14 113 -28 222 -31 243 l-6 37 277 0 277 0 -6 -37z" />
+                                </g>
+                            </svg></button>
+                        <button onclick="fetchCategoryData(this)" th:value="food">
+                            <strong>Foods</strong>
+                            <svg style="width: fit-content; rotate: 360deg; height: 2rem;" version="1.0"
+                                xmlns="http://www.w3.org/2000/svg" width="128.000000pt" height="128.000000pt"
+                                viewBox="0 0 128.000000 128.000000" preserveAspectRatio="xMidYMid meet">
+
+                                <g transform="translate(0.000000,128.000000) scale(0.100000,-0.100000)" fill="#000000"
+                                    stroke="none">
+                                    <path
+                                        d="M7 1084 c-4 -4 -7 -70 -7 -147 l0 -139 30 -28 30 -28 0 -260 c0 -224 2 -263 16 -276 20 -20 48 -20 68 0 14 13 16 52 16 276 l0 260 30 28 31 29 -3 143 c-3 119 -5 143 -18 143 -12 0 -16 -18 -18 -87 -1 -49 -7 -88 -12 -88 -5 0 -11 39 -12 88 -2 69 -6 87 -18 87 -12 0 -16 -18 -18 -87 -1 -49 -7 -88 -12 -88 -5 0 -11 39 -12 88 -2 69 -6 87 -18 87 -12 0 -16 -18 -18 -87 -1 -49 -7 -88 -12 -88 -5 0 -11 39 -12 87 -3 79 -12 106 -31 87z m173 -242 c0 -39 -17 -52 -70 -52 -53 0 -70 13 -70 52 0 28 0 28 70 28 70 0 70 0 70 -28z m-60 -352 c0 -167 -4 -260 -10 -260 -6 0 -10 93 -10 260 0 167 4 260 10 260 6 0 10 -93 10 -260z" />
+                                    <path
+                                        d="M538 1075 c-82 -22 -141 -57 -204 -119 -258 -258 -117 -696 245 -758 189 -32 383 67 470 240 88 175 56 379 -83 518 -116 115 -278 161 -428 119z m216 -40 c77 -20 133 -54 193 -118 152 -162 149 -403 -9 -563 -232 -237 -635 -107 -691 222 -21 124 17 246 106 341 108 115 251 157 401 118z" />
+                                    <path
+                                        d="M570 941 c-86 -28 -160 -91 -201 -171 -33 -64 -33 -184 -1 -256 29 -64 92 -126 157 -156 70 -32 180 -32 250 0 114 52 179 154 179 282 1 124 -59 221 -169 277 -53 28 -166 40 -215 24z m212 -68 c154 -86 182 -297 57 -422 -126 -126 -334 -97 -423 59 -27 48 -31 65 -31 130 0 65 4 82 31 130 32 57 97 111 158 130 57 17 150 5 208 -27z" />
+                                    <path
+                                        d="M1127 1083 c-4 -3 -7 -199 -7 -434 0 -375 2 -429 16 -443 20 -20 48 -20 68 0 13 13 16 45 16 199 l0 184 28 3 27 3 3 195 c2 180 1 198 -18 228 -31 51 -109 89 -133 65z m99 -84 c10 -21 14 -70 14 -199 l0 -170 -40 0 -40 0 0 210 0 210 26 -12 c14 -7 32 -24 40 -39z m-46 -589 c0 -113 -4 -180 -10 -180 -6 0 -10 67 -10 180 0 113 4 180 10 180 6 0 10 -67 10 -180z" />
+                                </g>
+                            </svg>
+
+                        </button>
+                    </div>
+                </div>
+
+
+
+                <!-- get category -->
+                <div class="M-categoryList-wrapper">
+                    <div id="categoryList">
+                        <div th:replace="~{fragments/CategoryData :: category_data}"></div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+
+            <!-- get drink belong to the selected category -->
+            <div id="category-data">
+                <div th:replace="~{fragments/Drink_FoodData :: drink_food}"></div>
+            </div>
+        </section>
+
+        <!------ order information------->
+        <section class="M-sec-right">
+            <Strong>Order Information</Strong>
+            <div style="width: 100%; height: 100%;" id="orderInfomation">
+                <div th:replace="~{fragments/OrderDetail :: orderDetail_of_table}"></div>
+            </div>
+        </section>
+
+        <!-- edit order -->
+        <div id="drink-add-edit-screen" class="add-drink-order"></div>
+
+        <!-- checkout -->
+        <div style="position: absolute; top: .7rem; right: 1rem;">
+            <button id="checkout"
+                style=" color: #ffffff; background-color: black; border: 2px solid black;border-radius: 4px; padding: .2rem .7rem .2rem .7rem;">
+
+                <Strong>checkout</Strong>
+            </button>
+        </div>
+
+        <div id="checkout-screen">
+            <form action="#" th:action="@{'/tables/table'+${tid}+'/checkout-order'}" method="post">
+                <div class="c12">
+                    <span>Cash receive</span>
+                    <span>Total cost</span>
+                    <span>Change</span>
+                </div>
+                <div class="c12" style="column-gap: 7rem !important;">
+                    <span style="width: 4rem;margin-left: 2rem;">
+                        <input id="cash_receive" name="cash_receive" type="number" min="0" step="0.1" value="0" style="padding-left: .5rem; width: 5rem; border: 2px solid orange; ;
+                        font-size: inherit; font-weight: inherit;"></span>
+                    <span id="total_" style="width: 5rem; margin-left: 4rem;">11.1</span>
+                    <span id="change_" style="width: 5rem;">0</span>
+
+                </div>
+                <div class="submit-checkout">
+                    <button>OK</button>
+                    <button type="button" onclick="cancelCheckOut()">cancel</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- back to table selection -->
+        <div style="position: absolute; right: 1rem; bottom: 1rem;">
+            <a href="/tables" style="text-decoration: none;color: #ffffff; 
+                        background-color: black; border: 2px solid black;border-radius: 4px; 
+                        padding: .1rem .7rem .1rem .7rem;">
+                <Strong>Back</Strong></a>
+        </div>
+    </div>
+</body>
+
+<script>
+    const CategoryList = document.getElementById("categoryList");
+    let isToggle = false;
+    function viewAllCategory(node) {
+        if (isToggle) {
+            CategoryList.classList.remove("M-classList-toggle");
+            node.classList.remove("M-rotate-ctg-up");
+            node.classList.add("M-rotate-ctg-down");
+        } else {
+            CategoryList.classList.add("M-classList-toggle");
+            node.classList.add("M-rotate-ctg-up");
+
+            if (node.classList.contains("M-rotate-ctg-down")) {
+                node.classList.remove("M-rotate-ctg-down");
+            }
+        }
+        isToggle = !isToggle;
+    }
+
+
+    const thisPageURL = window.location.href;
+    // get category wether drink or food
+    let previosSelectedCategory = document.getElementById("drink-category-button");
+    previosSelectedCategory.classList.add("CTG-on-hover")
+    function fetchCategoryData(node) {
+        if (previosSelectedCategory == node) return;
+
+        fetch(thisPageURL + "/get-category?ctg_name=" + node.value).then(async (res) => {
+            const data = await res.text();
+            // console.log(data);
+            CategoryList.innerHTML = data;
+            fetchFoods_DrinkByCategory(allDrinks);
+        })
+        node.classList.add("CTG-on-hover");
+        previosSelectedCategory.classList.remove("CTG-on-hover");
+        previosSelectedCategory = node;
+    }
+
+
+    // get data of drinks or food 
+    const allDrinks = document.getElementById("allDrinks")
+    let previousNode = allDrinks;
+    previousNode.classList.add("CTG-on-hover");
+    const drinks_ofCTG = document.getElementById("category-data");
+    function fetchFoods_DrinkByCategory(node) {
+        if (previosSelectedCategory.value == "drink") {
+            fetch(thisPageURL + "/get-drinks?id=" + node.value).then(async (res) => {
+                const data = await res.text();
+                // console.log(data);
+                drinks_ofCTG.innerHTML = data;
+            }).catch((err) => {
+                console.log("fetchFoods_DrinkByCategory!!!!!" + err);
+            })
+
+        } else {
+            fetch(thisPageURL + "/get-foods?id=" + node.value).then(async (res) => {
+                const data = await res.text();
+                // console.log(data);
+                drinks_ofCTG.innerHTML = data;
+            }).catch((err) => {
+                console.log("oops!!!! someting went wrong!!!!!" + err);
+            })
+        }
+        if (previousNode == node) return;
+
+        node.classList.add("CTG-on-hover")
+        previousNode.classList.remove("CTG-on-hover")
+        previousNode = node
+    }
+
+
+    //delete order drink or food
+    const orderInfo = document.getElementById("orderInfomation");
+    function deleteOrder(node) {
+        console.log(node.value);
+        fetch(thisPageURL + "/delete-order?id=" + node.value).then(async (res) => {
+            const data = await res.text();
+            // console.log(data);
+            orderInfo.innerHTML = data;
+        }).catch(e => {
+            console.log('delete order went wrong+' + e);
+        })
+    }
+
+    //edit quantity
+    function editQuantity(node) {
+        // console.log(node.dataset.drinkfood_id);
+        fetch(thisPageURL + '/edit-quantity?id=' + node.dataset.drinkfood_id + '&quantity=' + node.value, {
+            method: 'POST'
+        }).then(async res => {
+            const data = await res.text();
+            orderInfo.innerHTML = data
+            // console.log(data);
+
+        }).catch(e => {
+            console.log('edit quantity went wrong' + e);
+        })
+    }
+
+
+    //order wether food or drink...drink to new page and food same old page, pop one up (only 1 at a time...no quantity..)
+    // -Checkbox with single choice
+    function limitCheckboxSelection(checkbox) {
+        var checkboxes = document.getElementsByName(checkbox.name);
+        for (var i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i] !== checkbox) {
+                checkboxes[i].checked = false;
+            }
+        }
+    }
+    //- choose to order, can be drink or food as they will be sent to same api /add-{type}?id=
+    const addOrderScreen = document.getElementById('add-drink-screen');
+    // will store id of seleted drink
+    let drinfoodToAdd_id = -1;
+    function chooseOrder(node) {
+        if (previosSelectedCategory.value == "drink") {
+            drinkAddEdit_screen.style.display = 'block'
+            drinfoodToAdd_id = node.dataset.drinkfoodid,
+                fetch(thisPageURL + '/add-drink').then(async res => {
+                    const data = await res.text();
+                    drinkAddEdit_screen.innerHTML = data
+                }).catch(e => {
+                    console.log('fetch add drink view went wrong' + e);
+                })
+
+        } else {
+            fetch(thisPageURL + "/add-food?id=" + node.dataset.drinkfoodid, {
+                method: 'POST'
+            }).then(async (res) => {
+                const data = await res.text();
+                orderInfo.innerHTML = data;
+            }).catch(err => {
+                console.log("adding food went wrong :" + err);
+            })
+        }
+    }
+
+    function addDrink() {
+        const size = document.querySelector('input[name="size"]:checked').value
+        const cream = document.querySelector('#cream').checked
+        const sugar = document.querySelector('#sugar-select').value
+        const quantity = document.querySelector('#quantity').value
+        fetch(thisPageURL + "/add-drink?id=" + drinfoodToAdd_id + `&size=${size}&cream=${cream}&sugar=${sugar}&quantity=${quantity}`, {
+            method: 'POST',
+        }).then(async res => {
+            const result = await res.text();
+            // console.log(result);
+            orderInfo.innerHTML = result;
+            backToOrderSelectionScreen();
+        }).catch(e => {
+            console.log('add drink went wrong: ' + e);
+        })
+    }
+
+    function backToOrderSelectionScreen() {
+        drinkAddEdit_screen.style.display = 'none'
+    }
+
+    //hide add/edit drink screen
+    const drinkAddEdit_screen = document.getElementById('drink-add-edit-screen')
+    drinkAddEdit_screen.addEventListener('click', (event) => {
+        const modalOverLay=document.getElementById('modal-overlay')
+        if (event.target === modalOverLay) {
+            drinkAddEdit_screen.style.display = "none";
+        }
+    })
+    
+    // edit drink order
+    let orderToEdit_id = 0;
+    function editOrder(node) {
+        drinkAddEdit_screen.style.display = 'block'
+        orderToEdit_id = node.value;
+
+        fetch(thisPageURL + '/edit-drink?id=' + orderToEdit_id).then(async res => {
+            const data = await res.text();
+            drinkAddEdit_screen.innerHTML = data
+        }).catch(e => {
+            console.log('get edit drink screen went wrong+' + e);
+        })
+    }
+
+    function editDrink() {
+        const size = document.querySelector('input[name="size"]:checked').value
+        const cream = document.querySelector('#cream').checked
+        const sugar = document.querySelector('#sugar-select').value
+        const quantity = document.querySelector('#quantity').value
+        fetch(thisPageURL + "/edit-drink?id=" + orderToEdit_id + `&size=${size}&cream=${cream}&sugar=${sugar}&quantity=${quantity}`, {
+            method: 'POST',
+        }).then(async res => {
+            const result = await res.text();
+            // console.log(result);
+            orderInfo.innerHTML = result;
+            backToOrderSelectionScreen();
+        }).catch(e => {
+            console.log('edit drink went wrong+' + e);
+        })
+    }
+
+
+    // checkout part
+    const cashReceiveInput = document.getElementById('cash_receive');
+    const totalCost = document.getElementById('total_');
+    const change = document.getElementById('change_');
+
+    const checkout = document.getElementById("checkout");
+    const checkout_screen = document.getElementById("checkout-screen");
+    checkout.addEventListener("click", () => {
+        fetch(thisPageURL + "/order-price").then(async (res) => {
+            const data = await res.text();
+            // console.log(parseFloat(data));
+            if (parseFloat(data) < 0) {
+                alert("No order to checkout!!!")
+            } else {
+                totalCost.innerText = (data - 0).toFixed(2);
+                const reoundUp = Math.ceil(data);
+                cashReceiveInput.value = reoundUp;
+
+                change.innerText = (reoundUp - data).toFixed(2);
+                checkout_screen.style.display = 'block';
+            }
+        })
+    })
+
+    function cancelCheckOut() {
+        checkout_screen.style.display = 'none';
+    }
+
+    // calculate cash receive - total cost
+    cashReceiveInput.addEventListener('input', updateChange);
+    function updateChange() {
+        const cashReceived = parseFloat(cashReceiveInput.value);
+        const total = parseFloat(totalCost.textContent);
+        const changeAmount = (cashReceived - total).toFixed(2);
+        if (changeAmount < 0) {
+            change.style.color = 'red';
+        }
+        else {
+            change.style.color = 'inherit';
+        }
+        change.textContent = changeAmount;
+    }
+
+</script>
+
+</html>

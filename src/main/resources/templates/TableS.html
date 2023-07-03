@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TableSelection</title>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+</head>
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        /* box-sizing: border-box; */
+        /* font-family: sans-serif; */
+    }
+
+
+
+    ::-webkit-scrollbar {
+        width: .42rem;
+        height: .42rem;
+    }
+
+
+    ::-webkit-scrollbar-track {
+        /* border: 0.01vh solid rgb(114, 114, 114); */
+        border-radius: 1rem;
+        margin-block: 1rem;
+        margin-inline: 3rem;
+
+    }
+
+    ::-webkit-scrollbar-thumb {
+        border: 0.01vh solid rgb(8, 1, 1);
+        border-radius: 0.5rem;
+
+        background-image: linear-gradient(120deg, hsl(33, 83%, 63%) 10%, hsl(36, 95%, 44%) 100%);
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background-image: linear-gradient(120deg, hsl(33, 83%, 40%) 10%, hsl(36, 95%, 27%) 100%);
+    }
+
+    body {
+        padding: 0;
+        margin: 0;
+        overflow: hidden;
+    }
+
+    .main {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+
+    }
+    button:hover{
+        cursor: pointer;
+    }
+
+    .box1 {
+        width: 50%;
+        height: 100%;
+        overflow-y: auto;
+        display: flex;
+        justify-content: center;
+        background-color: rgb(255, 255, 255);
+
+        border-right: 2px solid hsl(274, 100%, 47%);;
+    }
+
+    .box1>:first-child {
+        align-items: center;
+        width: fit-content;
+        height: fit-content;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+
+
+    .V-table {
+        width: 100px;
+        height: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: xx-large;
+
+        border: 1px solid black;
+        border-radius: 4px;
+        margin: .5rem;
+    }
+
+    .V-table button {
+        height: 100%;
+        width: 100%;
+        background-color: inherit;
+        border: 2px solid black;
+        border-radius: 2px;
+
+        font-size: 2rem;
+        /* background-color: rgb(143, 231, 12); */
+    }
+
+    .V-table button:hover {
+        color: white;
+    }
+
+    /* ############################################### */
+    /* ############################################### */
+    /* ############################################### */
+    /* ############################################### */
+    /* ---------color -------- */
+    .V-bgc-table-free {
+        background-color: #2fff00 !important;
+    }
+
+    .V-bgc-table-busy {
+        background-color: hsl(274, 100%, 45%) !important;
+    }
+
+    .V-bgc-table-not-to-select {
+        background-color: grey !important;
+    }
+
+    /* --------------------- */
+    .V-bgc-out-shop {
+        background-color: #ff0000 !important;
+    }
+
+    .V-bgc-in-shop {
+        background-color: #4dea2a !important;
+    }
+
+
+    /* ############################################### */
+    /* ############################################### */
+    /* ############################################### */
+    /* ############################################### */
+    .box2 {
+        width: 50%;
+        height: 100%;
+        background-color: hsl(0, 0%, 100%);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        overflow: auto;
+        position: relative;
+
+    }
+
+    .box2>strong {
+        padding: 1rem;
+        font-size: 2rem;
+    }
+
+    #sub-box {
+        width: 90px;
+        height: 90px;
+        background-color: rgb(0, 0, 0);
+        /* float: left; */
+    }
+
+    .information {
+        width: 520px;
+        height: 300px;
+        font-size: 2rem;
+        /* background-color: #eddabe; */
+    }
+
+    #table {
+        width: 100%;
+        color: rgb(24, 23, 23);
+        /* background-color: red; */
+
+    }
+
+    #status {
+
+        color: rgb(24, 23, 23);
+
+    }
+
+    #order {
+        display: flex;
+        color: rgb(24, 23, 23);
+
+    }
+
+    #T_order {
+        color: rgb(24, 23, 23);
+    }
+
+
+    a {
+        width: 100px;
+        height: 100px;
+        background-color: blue;
+    }
+
+    .V-logout {
+        padding: 0.3rem 1rem .3rem 1rem;
+        font-weight: 700;
+        background-color: rgb(56, 3, 245);
+        color: white;
+        right: 0;
+        top: 0;
+        position: absolute;
+        border-radius: 4px;
+        border: none;
+    }
+
+    .V-logout:active {
+        cursor: pointer;
+        background-color: rgb(39, 249, 39);
+    }
+
+    .V-edit {
+        height: 1.5rem;
+        width: 1.7rem;
+        border: none;
+        background-color: inherit;
+        position: relative;
+    }
+
+    .V-edit:hover {
+        color: hsl(42, 99%, 47%);
+        cursor: pointer;
+    }
+
+    .V-edit-table {
+        position: absolute;
+        height: 100vh;
+        width: 100vw;
+        background-color: rgba(0, 0, 0, .6);
+        top: 0;
+        display: none;
+    }
+
+    .V-edit-wrapper {
+        margin: auto;
+        height: 40rem;
+        width: 50rem;
+        border: 2px solid black;
+        border-radius: 4px;
+        background-color: rgb(255, 255, 255);
+        overflow: hidden;
+
+    }
+
+    .V-orderList{
+        /* position: absolute; */
+        width: 30rem;
+        /* background-color:red; */
+    }
+    .V-orderData {
+        display: flex;
+        justify-content: space-between;
+    }
+
+</style>
+
+<body>
+    <div class="main" id="main">
+        <section class="box1" id="box1">
+            <div id="tableList">
+                <div class="V-table" th:each="table: ${tableList}">
+                    <button th:style="${table.id < tableCount/2 ? 'background-color: green' : 'background-color: red'}"
+                        th:class="${!table.status.equals('available')} ? V-bgc-table-busy" th:text="${table.id}"
+                        th:value="${table.id}" th:data-table_status="${table.status}" onclick="fetchTableInfo(this)"> id
+                    </button>
+                </div>
+            </div>
+
+        </section>
+
+        <section class="box2" id="box2">
+            <!-- <div th:replace="~{fragments/TableInfo :: table-order-info}"></div> -->
+            <p>Select any table</p>
+        </section>
+    </div>
+    <form action="#" th:action="@{/logout}" method="post">
+        <button class="V-logout">
+            Logout
+        </button>
+    </form>
+    </div>
+    <div class="V-edit-table" id="edit-screen">
+        <div class="V-edit-wrapper">
+            <div
+                style="height: 3rem; display: flex; justify-content: center; align-items: center; border-bottom: 2px solid black;">
+                <Strong>Select table to change</Strong>
+            </div>
+            <div
+                style="max-width: 100%;max-height: calc(100% - 3rem);display: flex; flex-wrap: wrap; justify-content: center;overflow: auto;">
+                <div class="V-table" th:each="table: ${tableList}">
+                    <button th:onclick="${table.status.equals('available')} ? 'reqChangingTable(this)' : 'doNthing()'"
+                        th:value="${table.id}" th:id="${table.id}"
+                        th:style="${table.id < tableCount/2 ? 'background-color: green' : 'background-color: red'}"
+                        th:class="${!table.status.equals('available')} ? V-bgc-table-not-to-select"
+                        th:text="${table.id}">
+                        id
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+
+    const thisPageURL = window.location.href;
+    function fetchTableInfo(node) {
+        // console.log(node);
+        const status = node.dataset.table_status.toLocaleLowerCase();
+
+        if (status == "available") {
+            window.location.href = thisPageURL + "/table" + node.value + "/drink-food-selection-order-info"
+        } else {
+            fetch(thisPageURL + "/table?tid=" + node.value).then(async (res) => {
+                const data = await res.text();
+                // console.log(data);
+                box2.innerHTML = data;
+            })
+        }
+    }
+
+    function toOrderSelectionScreen(node) {
+        location.href = "/tables/table" + node.value + "/drink-food-selection-order-info";
+    }
+    const editScreen = document.getElementById("edit-screen");
+
+    editScreen.addEventListener("click", (event) => {
+        if (event.target === editScreen) {
+            editScreen.style.display = "none";
+        }
+    });
+
+
+    let tableTochnage_id = 0;
+    function changeTable(node) {
+        
+        editScreen.style.display = 'block'
+        tableTochnage_id = node.value;
+        const table = document.getElementById(node.value)
+        table.classList.add('V-bgc-table-busy')
+        console.log(tableTochnage_id);
+        console.log(node.value);
+    }
+    function reqChangingTable(node) {
+        
+        fetch("/tables/change-table?id=" + tableTochnage_id + "&toid=" + node.value, {
+            method: 'POST'
+        }).then(async (res) => {
+            const data = await res.text();
+            //do noting with res
+            location.href = "/tables";
+        }).catch(e => {
+            console.log("change went wrong " + e);
+        })
+    }
+
+    function doNthing() { };
+
+    function clearTable(node){
+        console.log(node.value);
+        fetch("/tables/clear-table?id="+node.value,{
+            method:'POST'
+        }).then(async(res)=>{
+            const data=await res.text();
+            //do nothing...
+            location.href="/tables";
+        }).catch(e=>{
+            console.log("clearing table went wrong..."+e);
+        })
+    }
+
+</script>
+
+</html>

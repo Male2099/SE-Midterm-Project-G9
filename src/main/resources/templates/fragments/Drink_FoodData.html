@@ -1,0 +1,14 @@
+<div th:fragment="drink_food">
+    <div class="M-drink-data" th:each="drinkFood : ${drink_FoodList}" >
+        <div th:data-drinkfoodid="${drinkFood.id}" onclick="chooseOrder(this)">
+            <div class="M-drink-data-img-wrapper">
+                <!-- image of the drink -->
+                <img  th:src="@{'data:image/jpeg;base64,'+${drinkFood.image}}" draggable="false">
+            </div>
+            <hr width="100%">
+            <strong th:text="${drinkFood.name}">
+                drink name
+            </strong>
+        </div>
+    </div>
+</div>

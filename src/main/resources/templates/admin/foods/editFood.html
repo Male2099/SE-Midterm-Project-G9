@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .wrapper-crudFood {
+        box-sizing: border-box;
+        width: 50rem;
+        height: 25rem;
+
+        /* border: 2px solid black; */
+        border-radius: 4px;
+
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+    }
+
+    .wrapper-crudFood>:first-child {
+        width: 100%;
+        border: 2px solid black;
+        border-bottom: none;
+        padding: .7rem
+    }
+
+
+    .wrapper-crudFood>:last-child {
+        width: 100%;
+        height: 100%;
+        border: 2px solid black;
+        padding: .7rem;
+
+    }
+
+    .wrapper-crudFood form {
+        display: flex;
+        height: 100%;
+        width: 100%;
+
+    }
+
+
+
+    .form-left {
+        width: 100%;
+        height: 100%;
+        /* display: flex; */
+        align-items: center;
+        padding-right: .5rem;
+    }
+
+
+    .form-right {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+    }
+
+
+    /* ----------------- */
+    .input-box {
+        width: 100%;
+        height: 1.7rem;
+        margin: .5rem 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .input-box input {
+        height: 100%;
+        width: 70%;
+        padding: 0 .3rem;
+    }
+
+    .input-box select {
+        width: 74%;
+        height: 100%;
+    }
+
+    /* ---- */
+    .input-box-note {
+        position: relative;
+        width: 100%;
+        height: 7rem;
+        margin: .5rem 0;
+        display: flex;
+        justify-content: space-between;
+
+    }
+
+    .input-box-note textarea {
+        padding: 0 .3rem;
+        min-width: 70%;
+        max-width: 70%;
+        max-height: 7rem;
+    }
+
+    .button-wrapper {
+        width: 100%;
+        height: 1.7rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+    }
+
+    .button-wrapper {
+        display: flex;
+        justify-content: space-between;
+        padding: .3rem 1rem;
+        color: white;
+        font-weight: bold;
+        border-radius: 4px;
+        margin-top: 20px;
+    }
+
+    .button-wrapper>:last-child {
+        width: 50px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .button-wrapper>:last-child>:first-child {
+        padding: .3rem 1rem 1.3rem 1rem;
+        color: white;
+        font-weight: bold;
+        background-color: black;
+
+        border: 2px solid black;
+        border-radius: 4px;
+
+    }
+
+    .button-wrapper a {
+        text-decoration: none;
+        padding: 5px 20px;
+        color: white;
+        font-weight: bold;
+        background-color: black;
+
+        border: 2px solid black;
+        border-radius: 4px;
+    }
+
+    /* -----price box R M G */
+    .price-box {
+        padding: 0 .3rem;
+        width: 70%;
+        display: flex;
+        justify-content: space-evenly;
+    }
+
+    .price-box input {
+        width: 3rem;
+    }
+
+
+    /* ------------ */
+    .form-right {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        row-gap: 1rem;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .form-right>:first-child {
+        height: 85%;
+        width: 100%;
+        border: 1px solid grey;
+    }
+
+    .wrapperImg {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+    }
+
+    .form-right img {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        max-width: 100%;
+        max-height: 17.9rem;
+    }
+
+    /* CSS */
+    .button-31 {
+        background-color: #222;
+        border-radius: 4px;
+        border-style: none;
+        box-sizing: border-box;
+        color: #fff;
+        cursor: pointer;
+        display: inline-block;
+        font-family: "Farfetch Basis", "Helvetica Neue", Arial, sans-serif;
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 1.5;
+        margin: 0;
+        max-width: none;
+        min-height: 35px;
+        min-width: 10px;
+        outline: none;
+        overflow: hidden;
+        position: relative;
+        text-align: center;
+        text-transform: none;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        width: 80px;
+        height: 35px;
+        margin-left: 10px;
+    }
+
+    .button-31:hover,
+    .button-31:focus {
+        opacity: .75;
+    }
+
+    .cancel-btn-anchor {
+        text-align: center;
+    }
+
+    .submit-btn {
+        padding: 5px 20px;
+        font-weight: 700;
+    }
+
+    .information {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        column-gap: 10px;
+    }
+
+    #preview {
+        width: 395px;
+        height: 276px;
+        object-fit: cover;
+    }
+</style>
+
+<body>
+    <div class="wrapper-crudFood">
+        <section>
+            <Strong>Update Food</Strong>
+        </section>
+        <section>
+            <form th:action="@{/admin/foods/{id} (id=${food.id})}" th:object="${food}" method="POST"
+                enctype="multipart/form-data" onsubmit="false">
+                <div class="information">
+                    <div class="form-left">
+                        <div class="input-box">
+                            <label>Food Code</label>
+                            <input th:field="*{code}" type="text" name="code" required placeholder="Enter food code">
+                        </div>
+
+                        <div class="input-box">
+                            <label>Food name</label>
+                            <input type="text" name="name" th:field="*{name}" required placeholder="Enter food name">
+                        </div>
+
+
+                        <div class="input-box">
+                            <label>Category</label>
+                            <select th:field="*{foodCategory.id}" type="number" required name="dcid">
+                                <div th:each="foodCategory: ${foodCategories}">
+                                    <option th:value="${foodCategory.id}" th:text="${foodCategory.name}"></option>
+                                </div>
+
+                            </select>
+
+                        </div>
+                        <!-- HTML !-->
+                        <!-- <a th:href="@{/admin/foodCategory/new}"><button class="button-31" role="button">New</button></a> -->
+                        <!-- <div class="input-box">
+                            <label>Category</label>
+                            <input th:field="*{foodCategory.id}" type="number" name="fcid" required placeholder="Enter a number"
+                                style="margin-left: auto;">
+
+                        </div>
+                        <div style="display: inline-block;">
+                            <div th:each="foodCategory: ${foodCategories}" style="display: inline-block;">
+                                <div th:text="${foodCategory.id} + ' ' + ${foodCategory.name}"
+                                    style="margin-right: 10px;">
+                                </div>
+                            </div>
+                        </div> -->
+
+                        <div class="input-box" style="height: 3rem;">
+                            <label>Price</label>
+                            <input th:field="*{price}" type="number" value="0" step="0.1" min="0" required name="price">
+                        </div>
+
+                        <div class="input-box-note">
+                            <label>Note</label>
+                            <textarea th:field="*{note}" name="note" required placeholder="Enter food note"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-right">
+                        <div>
+                            <div class="wrapperImg">
+                                <img id="preview" src="" alt="" th:src="@{'data:image/jpeg;base64,'+*{image}}">
+                            </div>
+                        </div>
+                        <div>
+                            <input type="file" name="file" required onchange="previewFile()">
+                        </div>
+                    </div>
+
+                    <div class="button-wrapper">
+                        <button class="submit-btn" type="submit">OK</button>
+                        <a th:href="@{/admin/foods}" class="cancel-btn-anchor">Cancel</a>
+                    </div>
+                </div>
+            </form>
+        </section>
+    </div>
+</body>
+<script>
+    function previewFile() {
+        const preview = document.getElementById('preview');
+        const file = document.querySelector('input[type=file]').files[0];
+        const reader = new FileReader();
+
+        reader.addEventListener("load", () => {
+            preview.src = reader.result;
+        });
+
+        if (file) {
+            reader.readAsDataURL(file);
+        }
+    }
+</script>
+
+</html>

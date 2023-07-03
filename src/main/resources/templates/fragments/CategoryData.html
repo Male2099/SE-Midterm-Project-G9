@@ -1,0 +1,6 @@
+<div th:fragment="category_data" id="categoryList" th:each="category : ${categoryList}">
+    <input type="hidden" name="id" th:value="${category.id}">
+    <button class="M-category-name" onclick="fetchFoods_DrinkByCategory(this)" th:value="${category.id}">
+        <Strong th:text="${category.name}"></Strong>
+    </button>
+</div>

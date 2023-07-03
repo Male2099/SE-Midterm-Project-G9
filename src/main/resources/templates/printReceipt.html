@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>receipt</title>
+    <!-- <link rel="stylesheet" href="stylePrintReceipt.css"> -->
+    <style>
+        * {
+            padding: 0px;
+            margin: 0px;
+            font-size: 18px;
+        }
+
+        .wrapper {
+            margin: auto;
+            width: 380px;
+            height: auto;
+            background: rgb(255, 255, 255);
+            box-shadow: 1px 1px 10px 5px rgb(216, 216, 216);
+            margin-top: 5%;
+            padding-bottom: 5px;
+        }
+
+        .logo {
+            font-size: 40px;
+            text-align: center;
+            padding-top: 20px;
+        }
+
+        .title {
+            text-align: center;
+        }
+
+        .line {
+            width: 100%;
+            height: 1px;
+            background: black;
+        }
+
+        #text-line-1 {
+            padding: 5px;
+        }
+
+        #text-line-2 {
+            padding-right: 15px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            display: flex;
+            justify-content: end;
+            align-items: center;
+        }
+
+        #table-1 {
+            padding: 10px;
+        }
+
+        #text-output {
+            display: flex;
+            justify-content: left;
+            align-items: center;
+            margin-right: 10px;
+        }
+
+        #title {
+            padding: 10px;
+            /* display: flex; */
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .detail {
+            display: flex;
+            justify-content: end;
+            padding: 10px;
+        }
+
+        #detail-title {
+            padding-right: 10px;
+        }
+
+        #detail-out {
+            padding-right: 10px;
+        }
+
+        #footer {
+            text-align: center;
+            padding: 10px;
+        }
+
+        .back-to-table-selection{
+            text-decoration: none;
+            position: absolute;
+            right: 1rem;
+            top:1rem;
+            padding: .3rem;
+            border: 2px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="/tables" class="back-to-table-selection">Back to table selection</a>
+    <div class="wrapper">
+        <div class="logo">BROWN</div>
+        <div class="title">COFFEE AND BAKERY</div>
+        <div class="line"></div>
+        <div id="text-line-1">Order Number:<span th:th:text="${order.id}">179</span></div>
+        <div class="line"></div>
+        <div id="text-line-2">Brown 6(Sotheara):<span>097111111</span></div>
+        <div id="text-line-2">browncoffee.com</div>
+        <div class="line"></div>
+        <div>
+            <table id="table-1">
+                <tr>
+                    <td>Cashier</td>
+                    <th>
+                        <div id="text-output" th:text="${': '+order.getUser().getUsername()}">: KOEM TOLA</div>
+                    </th>
+                    <td>Table</td>
+                    <th>
+                        <div id="text-output">: SEC- <span th:text="${order.getTables().getId()}"></span></div>
+                    </th>
+                <tr>
+                    <td>T-in</td>
+                    <th>
+                        <div id="text-output"  th:text="${': '+order.getOrder_date().toString().split(' ')[0]}">: 02/05/2023</div>
+                    </th>
+                    <td>T-out</td>
+                    <th>
+                        <div id="text-output" th:text="${': '+today}">: 02/05/2023</div>
+                    </th>
+                </tr>
+                <tr>
+                    <td>PAX</td>
+                    <th>
+                        <div id="text-output">: 2</div>
+                    </th>
+                    <td>Counter</td>
+                    <th>
+                        <div id="text-output">: 01</div>
+                    </th>
+                </tr>
+            </table>
+        </div>
+        <div class="line"></div>
+        <div class="title">
+            <table id="table-2">
+                <tr>
+                    <th id="title">Description</th>
+                    <th id="title">QT</th>
+                    <th id="title">Unit Price</th>
+                    <th id="title">Amount</th>
+                </tr>
+                <tr th:each="odt : ${order.getOrderDetail()}">
+                    <td th:text="${odt.getDrink() == null ? odt.getFood.getName(): odt.getDrink().getName()}">Apple carrot</td>
+                    <td>
+                        <span th:text="${odt.getDrink() !=null? odt.getSize():''}"></span>&ensp;
+                        <span th:text="${odt.getQuantity()}"></span>
+                    </td>
+                    <td >2.3</td>
+                    <td th:text="${odt.getSubtotal()}">2.3</td>
+                </tr>
+            </table>
+        </div>
+        <div class="line"></div>
+        <div class="detail">
+            <div class="sub-total">
+                <div id="detail-title">
+                    <h4>Tolal:</h4>
+                </div>
+                <div id="detail-title">
+                    <p>Grand Total($)</p>
+                </div>
+                <div id="detail-title">
+                    <p>Grand Total(R)</p>
+                </div>
+            </div>
+            <div class="sub-total">
+                <div id="detail-out">
+                    <p th:text="${': '+order.getTotal()}">4.6</p>
+                </div>
+                <div id="detail-out">
+                    <p th:text="${': '+order.getTotal()}">4.6</p>
+                </div>
+                <div id="detail-out">
+                    <!-- just cut the decimal part ex: 4000.0 -> 4000 -->
+                    <p th:text="${': '+toReils}">16000</p>                    
+                </div>
+            </div>
+        </div>
+        <div class="line"></div>
+        <div id="footer">
+            <p>Wifi Password:<span>capuccino</span></p>
+            <h4>Dellvery Hotlline:<span>023 216 216</span></h4>
+        </div>
+    </div>
+</body>
+
+</html>
